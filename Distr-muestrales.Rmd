@@ -767,6 +767,43 @@ data.frame(exitos = 0:n, prob = dbinom(x = 0:n, size = n, prob = p)) %>%
 
 ```
 
+
+##
+
+
+
+`r fig_table_mp_start()`
+
+\btwocol
+
+
+```{r, echo=FALSE}
+n <- 20
+p <- 0.6
+x <- 0:20
+proba <- dbinom(x,size=n,prob=p)
+normal <- pnorm(x+.5, mean=n*p, sd=sqrt(n*p*(1-p))) - pnorm(x-.5, mean=n*p, sd=sqrt(n*p*(1-p)))
+data.frame(x,Binomial=proba,Normal=normal) %>% 
+  kable(align = "ccc",digits=3) %>% 
+  kable_styling(font_size = 9) 
+```
+
+Para el caso binomial: Tenemos que $X\sim Binom(n,p)$
+$$P(X=x;n,p)= \binom{n}{x}p^x (1-p)^{n-x}.$$
+Si definimos $\mu=np$, $\sigma=\sqrt{np(1-p)}$, podemos aproximar a $X$ mediante la variable $Y\sim N(\mu,\sigma)$ si calculamos de la siguiente forma:
+$$P(X=x) \approx P(x-.5 \le Y \le x+.5)$$
+$$=P\left(\frac{[x-.5] - \mu}{\sigma} \le Z\le \frac{[x+.5]- \mu}{\sigma}\right)$$
+
+
+
+\etwocol
+
+`r fig_table_mp_end()`
+
+
+
+
+
 ##
 
 El área de cualquier rectángulo (probabilidad de
@@ -777,7 +814,7 @@ normal correspondiente.
 
 Por ejemplo, $P(X = 10) = b(X=10; n =20, p = 0.6) = 0.117$, mientras que
 el área bajo la curva normal entre $9.5$ y $10.5$ es
-$P(-1.14 < Z < -0.68) = 0.1212$.
+$P(-1.14 < Z < -0.68) = 0.120$.
 
 Más generalmente, mientras el histograma de
 probabilidad binomial no esté demasiado
@@ -849,7 +886,7 @@ matrix(sample(datos),nrow = 5) %>% kable()
 k <- 1:length(datos)
 pk <- (k -.5)/length(datos)
 tabla <- data.frame(k,x=datos,Pk=pk)
-tabla %>% kable(align = "ccc",format = "latex",digits=2) %>% 
+tabla %>% kable(align = "ccc",digits=2) %>% 
   kable_styling(font_size = 7) 
 
 ```
@@ -861,6 +898,10 @@ tabla %>% kable(align = "ccc",format = "latex",digits=2) %>%
 
 `r fig_table_mp_end()`
 
+
+##
+
+![](figuras/probpaperLandscape.png)
 
 ##
 

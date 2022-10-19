@@ -1137,6 +1137,79 @@ aproximación, en especial en la parte media de la figura.
 
 \begin{frame}{}
 \protect\hypertarget{section-35}{}
+\begin{minipage}{\textwidth}
+
+\begin{multicols}{2}
+
+
+\begin{table}
+\centering\begingroup\fontsize{9}{11}\selectfont
+
+\begin{tabular}{c|c|c}
+\hline
+x & Binomial & Normal\\
+\hline
+0 & 0.000 & 0.000\\
+\hline
+1 & 0.000 & 0.000\\
+\hline
+2 & 0.000 & 0.000\\
+\hline
+3 & 0.000 & 0.000\\
+\hline
+4 & 0.000 & 0.000\\
+\hline
+5 & 0.001 & 0.001\\
+\hline
+6 & 0.005 & 0.005\\
+\hline
+7 & 0.015 & 0.014\\
+\hline
+8 & 0.035 & 0.035\\
+\hline
+9 & 0.071 & 0.072\\
+\hline
+10 & 0.117 & 0.120\\
+\hline
+11 & 0.160 & 0.163\\
+\hline
+12 & 0.180 & 0.181\\
+\hline
+13 & 0.166 & 0.163\\
+\hline
+14 & 0.124 & 0.120\\
+\hline
+15 & 0.075 & 0.072\\
+\hline
+16 & 0.035 & 0.035\\
+\hline
+17 & 0.012 & 0.014\\
+\hline
+18 & 0.003 & 0.005\\
+\hline
+19 & 0.000 & 0.001\\
+\hline
+20 & 0.000 & 0.000\\
+\hline
+\end{tabular}
+\endgroup{}
+\end{table}
+
+Para el caso binomial: Tenemos que $X\sim Binom(n,p)$
+$$P(X=x;n,p)= \binom{n}{x}p^x (1-p)^{n-x}.$$
+Si definimos $\mu=np$, $\sigma=\sqrt{np(1-p)}$, podemos aproximar a $X$ mediante la variable $Y\sim N(\mu,\sigma)$ si calculamos de la siguiente forma:
+$$P(X=x) \approx P(x-.5 \le Y \le x+.5)$$
+$$=P\left(\frac{[x-.5] - \mu}{\sigma} \le Z\le \frac{[x+.5]- \mu}{\sigma}\right)$$
+
+
+
+\end{multicols}
+
+\end{minipage}
+\end{frame}
+
+\begin{frame}{}
+\protect\hypertarget{section-36}{}
 El área de cualquier rectángulo (probabilidad de cualquier valor de
 \(X\) particular), excepto los de las colas de los extremos, se puede
 aproximar con presición mediante el área de la curva normal
@@ -1144,7 +1217,7 @@ correspondiente.
 
 Por ejemplo, \(P(X = 10) = b(X=10; n =20, p = 0.6) = 0.117\), mientras
 que el área bajo la curva normal entre \(9.5\) y \(10.5\) es
-\(P(-1.14 < Z < -0.68) = 0.1212\).
+\(P(-1.14 < Z < -0.68) = 0.120\).
 
 Más generalmente, mientras el histograma de probabilidad binomial no
 esté demasiado sesgado, las probabilidades binomiales se pueden
@@ -1153,7 +1226,7 @@ tiene aproximadamente una distribución normal.
 \end{frame}
 
 \begin{frame}{}
-\protect\hypertarget{section-36}{}
+\protect\hypertarget{section-37}{}
 \textbf{Proposición} : Sea \(X\) una V.A. Binomial basada en \(n\)
 intentos con probabilidad de éxito \(p\). Entonces, si el histograma de
 probabilidad binomial no está demasiado sesgado, \(X\) tiene
@@ -1191,7 +1264,7 @@ gráfica deberá parecer una línea recta.
 \end{frame}
 
 \begin{frame}{}
-\protect\hypertarget{section-37}{}
+\protect\hypertarget{section-38}{}
 \begin{minipage}{\textwidth}
 
 \begin{multicols}{2}
@@ -1284,9 +1357,14 @@ k & x & Pk\\
 \end{frame}
 
 \begin{frame}{}
-\protect\hypertarget{section-38}{}
-\includegraphics{Distr-muestrales_files/figure-beamer/unnamed-chunk-16-1.pdf}
-\includegraphics{Distr-muestrales_files/figure-beamer/unnamed-chunk-16-2.pdf}
+\protect\hypertarget{section-39}{}
+\includegraphics{figuras/probpaperLandscape.png}
+\end{frame}
+
+\begin{frame}{}
+\protect\hypertarget{section-40}{}
+\includegraphics{Distr-muestrales_files/figure-beamer/unnamed-chunk-17-1.pdf}
+\includegraphics{Distr-muestrales_files/figure-beamer/unnamed-chunk-17-2.pdf}
 \end{frame}
 
 \begin{frame}{Distribución Ji-cuadrada (Chi-Square)}
@@ -1309,7 +1387,7 @@ porcentaje de productos de baja calidad.
 \end{frame}
 
 \begin{frame}{}
-\protect\hypertarget{section-39}{}
+\protect\hypertarget{section-41}{}
 La varianza muestral
 
 \[s^2=\frac{\sum_{i=1}^n (x_i -\bar{x})}{n-1}.\]
@@ -1325,7 +1403,7 @@ forma de la distribución de origen.
 \end{frame}
 
 \begin{frame}{}
-\protect\hypertarget{section-40}{}
+\protect\hypertarget{section-42}{}
 \begin{block}{En el caso de población normal}
 \protect\hypertarget{en-el-caso-de-poblaciuxf3n-normal}{}
 Si la población de origen de las muestras es normal, entonces la
@@ -1348,7 +1426,7 @@ entonces \[X=Z_1^2 +Z_2^2+\cdots+Z_n^2\] entonces \(X\sim\chi_n^2\).
 \end{frame}
 
 \begin{frame}{}
-\protect\hypertarget{section-41}{}
+\protect\hypertarget{section-43}{}
 \begin{block}{Distribución Ji-cuadrada}
 \protect\hypertarget{distribuciuxf3n-ji-cuadrada}{}
 Una variable aleatoria \(x\) tiene una distribución ji-cuadrada
@@ -1369,12 +1447,12 @@ Casos importantes: \(\Gamma(1/2)=\sqrt{\pi}\)
 \end{frame}
 
 \begin{frame}{}
-\protect\hypertarget{section-42}{}
-\includegraphics{Distr-muestrales_files/figure-beamer/unnamed-chunk-17-1.pdf}
+\protect\hypertarget{section-44}{}
+\includegraphics{Distr-muestrales_files/figure-beamer/unnamed-chunk-18-1.pdf}
 \end{frame}
 
 \begin{frame}{}
-\protect\hypertarget{section-43}{}
+\protect\hypertarget{section-45}{}
 \begin{block}{Estimación de Varianzas}
 \protect\hypertarget{estimaciuxf3n-de-varianzas}{}
 \textbf{Teorema}. Si \(s^2\) es la varianza de una muestra aleatoria de
@@ -1402,7 +1480,7 @@ que el valor de \(\sigma^2\) que se supuso sea un error.
 \end{frame}
 
 \begin{frame}{}
-\protect\hypertarget{section-44}{}
+\protect\hypertarget{section-46}{}
 \begin{block}{Ejemplo}
 \protect\hypertarget{ejemplo-2}{}
 Un fabricante de baterías para automóvil garantiza que su producto
