@@ -1271,8 +1271,10 @@ gráfica deberá parecer una línea recta.
 
 
 
+\begin{table}
+\centering\begingroup\fontsize{9}{11}\selectfont
 
-\begin{tabular}{r|r|r|r|r}
+\begin{tabular}{c|c|c|c|c}
 \hline
 -0.8 & 3.4 & -2.8 & -2.6 & 1.2\\
 \hline
@@ -1285,6 +1287,8 @@ gráfica deberá parecer una línea recta.
 1.4 & 1.4 & 0.4 & 4.2 & -3.6\\
 \hline
 \end{tabular}
+\endgroup{}
+\end{table}
 
 
 \begin{table}
@@ -1364,7 +1368,48 @@ k & x & Pk\\
 \begin{frame}{}
 \protect\hypertarget{section-40}{}
 \includegraphics{Distr-muestrales_files/figure-beamer/unnamed-chunk-17-1.pdf}
-\includegraphics{Distr-muestrales_files/figure-beamer/unnamed-chunk-17-2.pdf}
+\end{frame}
+
+\begin{frame}{}
+\protect\hypertarget{section-41}{}
+\begin{block}{Ejercicio de Papel de probabilidad Normal}
+\protect\hypertarget{ejercicio-de-papel-de-probabilidad-normal}{}
+Se prueba la duración de un componente electrónico bajo condiciones de
+temperatura alta para acelerar el mecanismo de falla. A continuación se
+proporciona el tiempo de falla (en horas) de \(20\) componentes
+seleccionados al azar. Haga una gráfica de los datos sobre papel de
+probabilidad normal. ¿El tiempo de falla parece tener una distribución
+normal?
+
+\begin{table}
+\centering\begingroup\fontsize{9}{11}\selectfont
+
+\begin{tabular}{c|c|c|c}
+\hline
+176.1 & 24.7 & 34.9 & 133.8\\
+\hline
+76.6 & 55.0 & 122.8 & 99.6\\
+\hline
+150.4 & 73.0 & 90.6 & 131.5\\
+\hline
+197.6 & 124.5 & 2.4 & 40.4\\
+\hline
+35.3 & 155.7 & 46.0 & 40.4\\
+\hline
+\end{tabular}
+\endgroup{}
+\end{table}
+\end{block}
+\end{frame}
+
+\begin{frame}{}
+\protect\hypertarget{section-42}{}
+\includegraphics[width=2\textwidth,height=\textheight]{figuras/probpaperLandscape2.png}
+\end{frame}
+
+\begin{frame}{}
+\protect\hypertarget{section-43}{}
+\includegraphics{figuras/probpaperLandscape.png}
 \end{frame}
 
 \begin{frame}{Distribución Ji-cuadrada (Chi-Square)}
@@ -1387,7 +1432,7 @@ porcentaje de productos de baja calidad.
 \end{frame}
 
 \begin{frame}{}
-\protect\hypertarget{section-41}{}
+\protect\hypertarget{section-44}{}
 La varianza muestral
 
 \[s^2=\frac{\sum_{i=1}^n (x_i -\bar{x})}{n-1}.\]
@@ -1403,7 +1448,7 @@ forma de la distribución de origen.
 \end{frame}
 
 \begin{frame}{}
-\protect\hypertarget{section-42}{}
+\protect\hypertarget{section-45}{}
 \begin{block}{En el caso de población normal}
 \protect\hypertarget{en-el-caso-de-poblaciuxf3n-normal}{}
 Si la población de origen de las muestras es normal, entonces la
@@ -1426,7 +1471,7 @@ entonces \[X=Z_1^2 +Z_2^2+\cdots+Z_n^2\] entonces \(X\sim\chi_n^2\).
 \end{frame}
 
 \begin{frame}{}
-\protect\hypertarget{section-43}{}
+\protect\hypertarget{section-46}{}
 \begin{block}{Distribución Ji-cuadrada}
 \protect\hypertarget{distribuciuxf3n-ji-cuadrada}{}
 Una variable aleatoria \(x\) tiene una distribución ji-cuadrada
@@ -1447,12 +1492,12 @@ Casos importantes: \(\Gamma(1/2)=\sqrt{\pi}\)
 \end{frame}
 
 \begin{frame}{}
-\protect\hypertarget{section-44}{}
-\includegraphics{Distr-muestrales_files/figure-beamer/unnamed-chunk-18-1.pdf}
+\protect\hypertarget{section-47}{}
+\includegraphics{Distr-muestrales_files/figure-beamer/unnamed-chunk-19-1.pdf}
 \end{frame}
 
 \begin{frame}{}
-\protect\hypertarget{section-45}{}
+\protect\hypertarget{section-48}{}
 \begin{block}{Estimación de Varianzas}
 \protect\hypertarget{estimaciuxf3n-de-varianzas}{}
 \textbf{Teorema}. Si \(s^2\) es la varianza de una muestra aleatoria de
@@ -1480,7 +1525,7 @@ que el valor de \(\sigma^2\) que se supuso sea un error.
 \end{frame}
 
 \begin{frame}{}
-\protect\hypertarget{section-46}{}
+\protect\hypertarget{section-49}{}
 \begin{block}{Ejemplo}
 \protect\hypertarget{ejemplo-2}{}
 Un fabricante de baterías para automóvil garantiza que su producto
