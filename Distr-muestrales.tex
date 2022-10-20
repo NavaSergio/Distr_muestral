@@ -1258,7 +1258,7 @@ Es decir, es una gráfica que representa la distribución normal acumulada
 de los datos sobre una escala de probabilidad normal. Para construir la
 gráfica de probabilidad normal, deben disponerse los datos en orden
 ascendente y dibujar el \(k-ésimo\) de estos datos ordenados contra su
-punto de probabilidad acumulada \(Pk = (k - 1/2)/N\) sobre papel de
+punto de probabilidad acumulada \(Pk = (k - 1/2)/n\) sobre papel de
 probabilidad normal. Si la distribución de los datos es normal, esta
 gráfica deberá parecer una línea recta.
 \end{frame}
@@ -1269,7 +1269,7 @@ gráfica deberá parecer una línea recta.
 
 \begin{multicols}{2}
 
-
+Para ejemplificar, considere los $n=25$ datos siguientes.
 
 \begin{table}
 \centering\begingroup\fontsize{9}{11}\selectfont
@@ -1290,63 +1290,68 @@ gráfica deberá parecer una línea recta.
 \endgroup{}
 \end{table}
 
+Ahora procederemos a ordenar de menor a mayor y calculamos el valor de $P_k$ para el $k-ésimo$ valor ordenado correspondiente con la expresión
+
+$$P_k = \frac{(k - 1/2)}{n}$$
+
+
 
 \begin{table}
 \centering\begingroup\fontsize{7}{9}\selectfont
 
-\begin{tabular}{c|c|c}
+\begin{tabular}{c|c|c|c}
 \hline
-k & x & Pk\\
+k & x & Pk & Porcentaje\\
 \hline
-1 & -3.8 & 0.02\\
+1 & -3.8 & 0.02 & 2\\
 \hline
-2 & -3.6 & 0.06\\
+2 & -3.6 & 0.06 & 6\\
 \hline
-3 & -3.4 & 0.10\\
+3 & -3.4 & 0.10 & 10\\
 \hline
-4 & -3.4 & 0.14\\
+4 & -3.4 & 0.14 & 14\\
 \hline
-5 & -2.8 & 0.18\\
+5 & -2.8 & 0.18 & 18\\
 \hline
-6 & -2.8 & 0.22\\
+6 & -2.8 & 0.22 & 22\\
 \hline
-7 & -2.6 & 0.26\\
+7 & -2.6 & 0.26 & 26\\
 \hline
-8 & -2.6 & 0.30\\
+8 & -2.6 & 0.30 & 30\\
 \hline
-9 & -0.8 & 0.34\\
+9 & -0.8 & 0.34 & 34\\
 \hline
-10 & -0.8 & 0.38\\
+10 & -0.8 & 0.38 & 38\\
 \hline
-11 & 0.2 & 0.42\\
+11 & 0.2 & 0.42 & 42\\
 \hline
-12 & 0.2 & 0.46\\
+12 & 0.2 & 0.46 & 46\\
 \hline
-13 & 0.4 & 0.50\\
+13 & 0.4 & 0.50 & 50\\
 \hline
-14 & 0.4 & 0.54\\
+14 & 0.4 & 0.54 & 54\\
 \hline
-15 & 0.4 & 0.58\\
+15 & 0.4 & 0.58 & 58\\
 \hline
-16 & 1.2 & 0.62\\
+16 & 1.2 & 0.62 & 62\\
 \hline
-17 & 1.4 & 0.66\\
+17 & 1.4 & 0.66 & 66\\
 \hline
-18 & 1.4 & 0.70\\
+18 & 1.4 & 0.70 & 70\\
 \hline
-19 & 1.4 & 0.74\\
+19 & 1.4 & 0.74 & 74\\
 \hline
-20 & 1.6 & 0.78\\
+20 & 1.6 & 0.78 & 78\\
 \hline
-21 & 2.6 & 0.82\\
+21 & 2.6 & 0.82 & 82\\
 \hline
-22 & 2.6 & 0.86\\
+22 & 2.6 & 0.86 & 86\\
 \hline
-23 & 3.4 & 0.90\\
+23 & 3.4 & 0.90 & 90\\
 \hline
-24 & 4.2 & 0.94\\
+24 & 4.2 & 0.94 & 94\\
 \hline
-25 & 5.2 & 0.98\\
+25 & 5.2 & 0.98 & 98\\
 \hline
 \end{tabular}
 \endgroup{}
@@ -1367,11 +1372,16 @@ k & x & Pk\\
 
 \begin{frame}{}
 \protect\hypertarget{section-40}{}
-\includegraphics{Distr-muestrales_files/figure-beamer/unnamed-chunk-17-1.pdf}
+\includegraphics[width=2\textwidth,height=\textheight]{figuras/probpaperLandscape2.png}
 \end{frame}
 
 \begin{frame}{}
 \protect\hypertarget{section-41}{}
+\includegraphics{Distr-muestrales_files/figure-beamer/unnamed-chunk-17-1.pdf}
+\end{frame}
+
+\begin{frame}{}
+\protect\hypertarget{section-42}{}
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5333}}
   >{\raggedleft\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4667}}@{}}
@@ -1385,23 +1395,24 @@ k & x & Pk\\
 \end{frame}
 
 \begin{frame}{}
-\protect\hypertarget{section-42}{}
+\protect\hypertarget{section-43}{}
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5333}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4667}}@{}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.5333}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.4667}}@{}}
 \toprule()
 \endhead
 \includegraphics[width=0.45\textwidth,height=\textheight]{figuras/Papel3.png}
 &
 \includegraphics[width=0.45\textwidth,height=\textheight]{figuras/Papel4.png} \\
 \includegraphics[width=0.45\textwidth,height=\textheight]{figuras/Papel5.png}
-& \\
+&
+\(P\left[ \mu -\sigma <X<\mu +\sigma \right] = 0.683 \newline P\left[ \mu -2\sigma <X<\mu +2\sigma \right] = 0.954 \newline P\left[ \mu -3\sigma <X<\mu +3\sigma \right] = 0.997\) \\
 \bottomrule()
 \end{longtable}
 \end{frame}
 
 \begin{frame}{}
-\protect\hypertarget{section-43}{}
+\protect\hypertarget{section-44}{}
 \begin{block}{Ejercicio de Papel de probabilidad Normal}
 \protect\hypertarget{ejercicio-de-papel-de-probabilidad-normal}{}
 Se prueba la duración de un componente electrónico bajo condiciones de
@@ -1433,12 +1444,12 @@ normal?
 \end{frame}
 
 \begin{frame}{}
-\protect\hypertarget{section-44}{}
+\protect\hypertarget{section-45}{}
 \includegraphics[width=2\textwidth,height=\textheight]{figuras/probpaperLandscape2.png}
 \end{frame}
 
 \begin{frame}{}
-\protect\hypertarget{section-45}{}
+\protect\hypertarget{section-46}{}
 \includegraphics{figuras/probpaperLandscape.png}
 \end{frame}
 
@@ -1450,9 +1461,9 @@ normal?
 \item
   Realice la gráfica de probabilidad normal del ejemplo anterior.
 \item
-  Simule con semilla fija datos con distribución Normal, Exponencial,
-  Uniforme, t, Ji Cuadrada. Esto realícelo para tamaños de muestra de
-  15, 30, 50 y 100.
+  Simule con \emph{semilla fija} datos con distribución Normal,
+  Exponencial, Uniforme, t, Ji Cuadrada. Esto realícelo para tamaños de
+  muestra de 15, 30, 50 y 100.
 \end{itemize}
 \end{block}
 \end{frame}
@@ -1477,7 +1488,7 @@ porcentaje de productos de baja calidad.
 \end{frame}
 
 \begin{frame}{}
-\protect\hypertarget{section-46}{}
+\protect\hypertarget{section-47}{}
 La varianza muestral
 
 \[s^2=\frac{\sum_{i=1}^n (x_i -\bar{x})}{n-1}.\]
@@ -1493,7 +1504,7 @@ forma de la distribución de origen.
 \end{frame}
 
 \begin{frame}{}
-\protect\hypertarget{section-47}{}
+\protect\hypertarget{section-48}{}
 \begin{block}{En el caso de población normal}
 \protect\hypertarget{en-el-caso-de-poblaciuxf3n-normal}{}
 Si la población de origen de las muestras es normal, entonces la
@@ -1516,7 +1527,7 @@ entonces \[X=Z_1^2 +Z_2^2+\cdots+Z_n^2\] entonces \(X\sim\chi_n^2\).
 \end{frame}
 
 \begin{frame}{}
-\protect\hypertarget{section-48}{}
+\protect\hypertarget{section-49}{}
 \begin{block}{Distribución Ji-cuadrada}
 \protect\hypertarget{distribuciuxf3n-ji-cuadrada}{}
 Una variable aleatoria \(x\) tiene una distribución ji-cuadrada
@@ -1537,12 +1548,12 @@ Casos importantes: \(\Gamma(1/2)=\sqrt{\pi}\)
 \end{frame}
 
 \begin{frame}{}
-\protect\hypertarget{section-49}{}
+\protect\hypertarget{section-50}{}
 \includegraphics{Distr-muestrales_files/figure-beamer/unnamed-chunk-19-1.pdf}
 \end{frame}
 
 \begin{frame}{}
-\protect\hypertarget{section-50}{}
+\protect\hypertarget{section-51}{}
 \begin{block}{Estimación de Varianzas}
 \protect\hypertarget{estimaciuxf3n-de-varianzas}{}
 \textbf{Teorema}. Si \(s^2\) es la varianza de una muestra aleatoria de
@@ -1570,7 +1581,7 @@ que el valor de \(\sigma^2\) que se supuso sea un error.
 \end{frame}
 
 \begin{frame}{}
-\protect\hypertarget{section-51}{}
+\protect\hypertarget{section-52}{}
 \begin{block}{Ejemplo}
 \protect\hypertarget{ejemplo-2}{}
 Un fabricante de baterías para automóvil garantiza que su producto

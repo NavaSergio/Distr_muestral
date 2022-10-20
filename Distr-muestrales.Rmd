@@ -859,7 +859,7 @@ construir la gráfica de probabilidad normal,
 deben disponerse los datos en orden
 ascendente y dibujar el $k-ésimo$ de estos datos
 ordenados contra su punto de probabilidad
-acumulada $Pk = (k - 1/2)/N$ sobre papel de
+acumulada $Pk = (k - 1/2)/n$ sobre papel de
 probabilidad normal. Si la distribución de los
 datos es normal, esta gráfica deberá parecer
 una línea recta.
@@ -872,7 +872,7 @@ una línea recta.
 
 \btwocol
 
-
+Para ejemplificar, considere los $n=25$ datos siguientes.
 
 ```{r}
 datos <-c(-3.8, -3.6, -3.4, -3.4, -2.8,-2.8,-2.6,-2.6,-0.8,-0.8,0.2,0.2,0.4,0.4,
@@ -882,12 +882,17 @@ matrix(sample(datos),nrow = 5) %>% kable(align = "ccccc") %>%
   kable_styling(font_size = 9) 
 ```
 
+Ahora procederemos a ordenar de menor a mayor y calculamos el valor de $P_k$ para el $k-ésimo$ valor ordenado correspondiente con la expresión
+
+$$P_k = \frac{(k - 1/2)}{n}$$
+
+
 
 ```{r, fig.align = "right", echo = FALSE}
 k <- 1:length(datos)
 pk <- (k -.5)/length(datos)
-tabla <- data.frame(k,x=datos,Pk=pk)
-tabla %>% kable(align = "ccc",digits=2) %>% 
+tabla <- data.frame(k,x=datos,Pk=pk,Porcentaje=pk*100)
+tabla %>% kable(align = "cccc",digits=2) %>% 
   kable_styling(font_size = 7) 
 
 ```
@@ -906,6 +911,10 @@ tabla %>% kable(align = "ccc",digits=2) %>%
 
 
 
+##
+
+![](figuras/probpaperLandscape2.png){width=200%}
+
 
 ##
 
@@ -923,9 +932,9 @@ tabla %>% ggplot(aes(sample = x)) + stat_qq() + theme_bw()
 ##
 
 |        |       |
-|:-------|------:|
+|-------:|:------|
 | ![alt text](figuras/Papel3.png){ width=45% } | ![alt text](figuras/Papel4.png){ width=45% }  | 
-| ![alt text](figuras/Papel5.png){ width=45% } |   | 
+| ![alt text](figuras/Papel5.png){ width=45% } | $P\left[ \mu -\sigma <X<\mu +\sigma  \right] =  0.683 \newline P\left[ \mu -2\sigma <X<\mu +2\sigma  \right] = 0.954 \newline P\left[ \mu -3\sigma <X<\mu +3\sigma  \right] = 0.997$ | 
 
 ##
 
@@ -964,7 +973,7 @@ matrix(tiempofalla,ncol = 4) %>% kable(align = "cccc") %>%
 
 - Realice la gráfica de probabilidad normal del ejemplo anterior.
 
-- Simule con semilla fija datos con distribución Normal, Exponencial, Uniforme, t, Ji Cuadrada. Esto realícelo para tamaños de muestra de 15, 30, 50 y 100.
+- Simule con *semilla fija* datos con distribución Normal, Exponencial, Uniforme, t, Ji Cuadrada. Esto realícelo para tamaños de muestra de 15, 30, 50 y 100.
 
 
 ## Distribución Ji-cuadrada (Chi-Square)
