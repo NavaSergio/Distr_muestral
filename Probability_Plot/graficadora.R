@@ -25,46 +25,12 @@ ui<-fluidPage(
                sliderInput("alfa","Alpha: ", value = 1,min=1, max=20),
                sliderInput("beta", "Beta: ", value = 1,min=1, max=20)
              ),
-      ),
-      column(2,
-             checkboxInput(inputId="otradist",label="I wanna graph two distributions", value = F)),
-      column(2,
-             conditionalPanel(
-               condition = "input.otradist == true",
-               selectInput("dist2","Choose the distribution: ", choices =
-                           list("None :)", Continuas = list("Normal", "Beta", "Chi-cuadrado"))
-                           )
-             )
-      
-       ),
-      column(2,
-              conditionalPanel(
-                condition = "input.dist2 == 'Normal' && input.otradist == true",
-                numericInput("media2","Mean: ", value = 0),
-                numericInput("desv2", "Standard deviation: ", value = 1,min = 0)
-              ),
-              conditionalPanel(
-                condition = "input.dist2 == 'Beta' && input.otradist == true",
-                numericInput("alfa2","Alpha: ", value = 1, min = 0),
-                numericInput("beta2", "Beta: ", value = 1, min = 0)
-              ),
-              conditionalPanel(
-                condition = "input.dist2 == 'Chi-cuadrado' && input.otradist == true",
-                numericInput("df2", "Degrees of freedom: ", value = 1, min = 1, step = 1)
-              ),
-       )
-             
+      )
     ),
     fluidRow(
       column(6,
-             plotOutput("plot")
-      ),
-      
-      column(6,
-             conditionalPanel(
-               condition = "input.otradist== true && dist2!=='None :)'",
-               plotOutput("plot2")
-             )
+             plotOutput("plot"),
+             plotOutput("plot2")
       )
     )
 )
@@ -87,33 +53,31 @@ server<-function(input, output, session){
       Density<-switch(dist(),"Normal"=dnorm(puntos,media(),sd()),
                       "Beta"=dbeta(puntos,alfa(),beta()),
                       "Chi-cuadrado"=dchisq(puntos,df()))
-      media<-switch(dist(),"Normal"=media(),"Beta"=alfa()/(alfa()+beta()),"Chi-cuadrado" = df2())
+      Acumulada<-switch(dist(),"Normal"=pnorm(puntos,media(),sd()),
+                      "Beta"=pbeta(puntos,alfa(),beta()),
+                      "Chi-cuadrado"=pchisq(puntos,df()))
+      
+      media<-switch(dist(),"Normal"=media(),"Beta"=alfa()/(alfa()+beta()),"Chi-cuadrado" = df())
       yl<<-c(0,4*max(Density)/3)
       plot(puntos,Density,type="l", col = "cyan3",lwd=2.5, xlab="Values",main=dist(),ylim=yl)
-      abline(v = media, col="cyan2",lwd = 2, lty = 2)})
-    
-    dist2<-reactive(input$dist2)
-    media2<-reactive(input$media2)
-    sd2<-reactive(input$desv2)
-    lambda2<-reactive(input$lambda2)
-    n2<-reactive(input$n2)
-    p2<-reactive(input$p2)
-    alfa2<-reactive(input$alfa2)
-    beta2<-reactive(input$beta2)
-    df2<-reactive(input$df2)
+      abline(v = media, col="cyan2",lwd = 2, lty = 2)
+      })
     output$plot2<-renderPlot({
+      inf<-switch(dist(),"Normal"=media()-3*sd(),"Beta"=0,"Chi-cuadrado"=0)
+      sup<-switch(dist(),"Normal"=media()+3*sd(),"Beta"=1,"Chi-cuadrado"=df()*2)
+      puntos<-switch(dist(),"Normal"=seq(from=inf,to=sup,length.out=1000),"Beta"=seq(from=inf,to=sup,length.out=1000),
+                     "Chi-cuadrado"=seq(from=inf,to=sup,length.out = 1000))
+      Density<-switch(dist(),"Normal"=dnorm(puntos,media(),sd()),
+                      "Beta"=dbeta(puntos,alfa(),beta()),
+                      "Chi-cuadrado"=dchisq(puntos,df()))
+      Acumulada<-switch(dist(),"Normal"=pnorm(puntos,media(),sd()),
+                        "Beta"=pbeta(puntos,alfa(),beta()),
+                        "Chi-cuadrado"=pchisq(puntos,df()))
       
-      inf2<-switch(dist2(),"Normal"=media2()-3*sd2(),"Beta"=0,"Chi-cuadrado"=0)
-      sup2<-switch(dist2(),"Normal"=media2()+3*sd2(),"Beta"=1,"Chi-cuadrado"=df2()*2)
-      puntos2<-switch(dist2(),"Normal"=seq(from=inf2,to=sup2,length.out=1000),"Beta"=seq(from=inf2,to=sup2,length.out=1000),
-                     "Chi-cuadrado"=seq(from=inf2,to=sup2,length.out = 1000))
-      Density2<-switch(dist2(),"Normal"=dnorm(puntos2,media2(),sd2()),
-                       "Beta"=dbeta(puntos2,alfa2(),beta2()),
-                       "Chi-cuadrado"=dchisq(puntos2,df2()))
-      media2<-switch(dist2(),"Normal"=media2(),"Beta"=alfa2()/(alfa2()+beta2()),"Chi-cuadrado" = df2())
-      plot(puntos2,Density2,type="l", col = "indianred2",lwd=2.5, xlab="Values",main=dist2(),ylim=yl)
-      abline(v = media2, col="mediumaquamarine",lwd = 2, lty = 2)})
-      
+      media<-switch(dist(),"Normal"=media(),"Beta"=alfa()/(alfa()+beta()),"Chi-cuadrado" = df())      
+      plot(puntos,Acumulada,type="l", col = "cyan3",lwd=2.5, xlab="Values",main=dist(),ylim=c(0,1))
+      abline(v = media, col="cyan2",lwd = 2, lty = 2)
+    })
 }
 
 shinyApp(ui, server)
