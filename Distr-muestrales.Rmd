@@ -958,6 +958,14 @@ matrix(tiempofalla,ncol = 4) %>% kable(align = "cccc") %>%
 
 ![](figuras/probpaperLandscape.png)
 
+## Gráfica de Probabilidad normal en R
+
+### Práctica
+
+- Realice la gráfica de probabilidad normal del ejemplo anterior.
+
+- Simule con semilla fija datos con distribución Normal, Exponencial, Uniforme, t, Ji Cuadrada. Esto realícelo para tamaños de muestra de 15, 30, 50 y 100.
+
 
 ## Distribución Ji-cuadrada (Chi-Square)
 
