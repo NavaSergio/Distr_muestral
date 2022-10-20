@@ -917,8 +917,15 @@ tabla %>% ggplot(aes(sample = x)) + stat_qq() + theme_bw()
 
 |        |       |
 |:-------|------:|
-| ![alt text](figuras/Papel1.png){ width=40% } | ![alt text](figuras/Papel2.png){ width=40% }  | 
-| ![alt text](figuras/Papel3.png){ width=40% } | ![alt text](figuras/Papel4.png){ width=40% }  | 
+| ![alt text](figuras/Papel1.png){ width=45% } | ![alt text](figuras/Papel2.png){ width=45% }  | 
+
+
+##
+
+|        |       |
+|:-------|------:|
+| ![alt text](figuras/Papel3.png){ width=45% } | ![alt text](figuras/Papel4.png){ width=45% }  | 
+| ![alt text](figuras/Papel5.png){ width=45% } |   | 
 
 ##
 
