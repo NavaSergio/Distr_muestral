@@ -28,6 +28,9 @@ ui<-fluidPage(
                          value = 10,
                          min = 5, 
                          max = 200),
+             checkboxInput(inputId="linea",
+                           label="Dibujar la qqline", 
+                           value = F),
       )
     ),
     fluidRow(
@@ -51,6 +54,7 @@ server<-function(input, output, session){
     beta<-reactive(input$beta)
     df<-reactive(input$df)
     m<-reactive(input$m)
+    linea <- reactive(input$linea)
     output$plot<-renderPlot({
       inf<-switch(dist(),"Normal"=media()-3*sd(),"Beta"=0,"Chi-cuadrada"=0)
       sup<-switch(dist(),"Normal"=media()+3*sd(),"Beta"=1,"Chi-cuadrada"=df()*2)
@@ -77,11 +81,12 @@ server<-function(input, output, session){
       abline(v = media, col="cyan2",lwd = 2, lty = 2)
     })
     output$plotqq<-renderPlot({
+      set.seed(12894141)
       Muestra<-switch(dist(),"Normal"=rnorm(m(),media(),sd()),
                         "Beta"=rbeta(m(),alfa(),beta()),
                         "Chi-cuadrada"=rchisq(m(),df()))
       qqnorm(Muestra)
-      qqline(Muestra)
+      if (linea()) qqline(Muestra)
     })
 }
 
