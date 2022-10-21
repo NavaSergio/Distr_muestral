@@ -25,11 +25,21 @@ ui<-fluidPage(
                sliderInput("alfa","Alpha: ", value = 1,min=1, max=20),
                sliderInput("beta", "Beta: ", value = 1,min=1, max=20)
              ),
+      ),
+      column(2,
+             sliderInput("m", 
+                         "Tamaño de muestra: ", 
+                         value = 10,
+                         min = 5, 
+                         max = 100),
       )
     ),
     fluidRow(
       column(6,
              plotOutput("plot"),
+             plotOutput("plotqq")
+      ),
+      column(6,
              plotOutput("plot2")
       )
     )
@@ -44,6 +54,7 @@ server<-function(input, output, session){
     alfa<-reactive(input$alfa)
     beta<-reactive(input$beta)
     df<-reactive(input$df)
+    m<-reactive(input$m)
     output$plot<-renderPlot({
       
       inf<-switch(dist(),"Normal"=media()-3*sd(),"Beta"=0,"Chi-cuadrado"=0)
@@ -53,9 +64,6 @@ server<-function(input, output, session){
       Density<-switch(dist(),"Normal"=dnorm(puntos,media(),sd()),
                       "Beta"=dbeta(puntos,alfa(),beta()),
                       "Chi-cuadrado"=dchisq(puntos,df()))
-      Acumulada<-switch(dist(),"Normal"=pnorm(puntos,media(),sd()),
-                      "Beta"=pbeta(puntos,alfa(),beta()),
-                      "Chi-cuadrado"=pchisq(puntos,df()))
       
       media<-switch(dist(),"Normal"=media(),"Beta"=alfa()/(alfa()+beta()),"Chi-cuadrado" = df())
       yl<<-c(0,4*max(Density)/3)
@@ -67,9 +75,6 @@ server<-function(input, output, session){
       sup<-switch(dist(),"Normal"=media()+3*sd(),"Beta"=1,"Chi-cuadrado"=df()*2)
       puntos<-switch(dist(),"Normal"=seq(from=inf,to=sup,length.out=1000),"Beta"=seq(from=inf,to=sup,length.out=1000),
                      "Chi-cuadrado"=seq(from=inf,to=sup,length.out = 1000))
-      Density<-switch(dist(),"Normal"=dnorm(puntos,media(),sd()),
-                      "Beta"=dbeta(puntos,alfa(),beta()),
-                      "Chi-cuadrado"=dchisq(puntos,df()))
       Acumulada<-switch(dist(),"Normal"=pnorm(puntos,media(),sd()),
                         "Beta"=pbeta(puntos,alfa(),beta()),
                         "Chi-cuadrado"=pchisq(puntos,df()))
@@ -77,6 +82,16 @@ server<-function(input, output, session){
       media<-switch(dist(),"Normal"=media(),"Beta"=alfa()/(alfa()+beta()),"Chi-cuadrado" = df())      
       plot(puntos,Acumulada,type="l", col = "cyan3",lwd=2.5, xlab="Values",main=dist(),ylim=c(0,1))
       abline(v = media, col="cyan2",lwd = 2, lty = 2)
+    })
+    output$plotqq<-renderPlot({
+ 
+      Muestra<-switch(dist(),"Normal"=rnorm(m(),media(),sd()),
+                        "Beta"=rbeta(m(),alfa(),beta()),
+                        "Chi-cuadrado"=rchisq(m(),df()))
+      
+
+      qqnorm(Muestra)
+      qqline(Muestra)
     })
 }
 
