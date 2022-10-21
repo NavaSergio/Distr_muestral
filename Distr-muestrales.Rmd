@@ -20,7 +20,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE, fig.align="center")
 
 
 library(tidyverse)
@@ -988,6 +988,12 @@ matrix(tiempofalla,ncol = 4) %>% kable(align = "cccc") %>%
 - Realice la gráfica de probabilidad normal del ejemplo anterior.
 
 - Simule con *semilla fija* datos con distribución Normal, Exponencial, Uniforme, t, Ji Cuadrada. Esto realícelo para tamaños de muestra de 15, 30, 50 y 100.
+
+## 
+
+Ver la siguiente aplicación en Shiny [qqnorm](https://s3rgionava.shinyapps.io/QQnorm/?_ga=2.74771473.2040383487.1666298329-1276638344.1663958366)
+
+![Pantalla de Shiny app QQnorm](figuras/QQnorm.png){width=70%}
 
 
 ## Distribución Ji-cuadrada (Chi-Square)

@@ -34,11 +34,11 @@ ui<-fluidPage(
       )
     ),
     fluidRow(
-      column(6,
+      column(4,
              plotOutput("plot"),
              plotOutput("plotqq")
       ),
-      column(6,
+      column(4,
              plotOutput("plot2")
       )
     )
