@@ -554,7 +554,9 @@ con $p=x/n$, para $n \to \infty$, $z$ tiene una distribución límite normal est
 
 
 
-## Distribución t-Student
+## Distribución t-Student (William S. Gosset)
+
+### 
 
 Si $\bar{x}$ y $s^2$ son la media y la varianza de una
 muestra aleatoria de tamaño $n$ tomada de una
@@ -579,17 +581,29 @@ base <-
   ggplot() +
   xlim(-5, 5)
 
-base +
+Densidad <- base +
   geom_function(aes(colour = "normal"), fun = dnorm) +
   geom_function(aes(colour = "t, df =  1"), fun = dt, args = list(df = 1)) +
   geom_function(aes(colour = "t, df =  3"), fun = dt, args = list(df = 3)) +
   geom_function(aes(colour = "t, df =  9"), fun = dt, args = list(df = 9)) +
   geom_function(aes(colour = "t, df = 27"), fun = dt, args = list(df = 27)) +
   theme_classic() + 
+  labs(y = "densidad",
+       title = "Distribución t y normal estándar",
+       x = "x")
+
+Distribucion <- base +
+  geom_function(aes(colour = "normal"), fun = pnorm) +
+  geom_function(aes(colour = "t, df =  1"), fun = pt, args = list(df = 1)) +
+  geom_function(aes(colour = "t, df =  3"), fun = pt, args = list(df = 3)) +
+  geom_function(aes(colour = "t, df =  9"), fun = pt, args = list(df = 9)) +
+  geom_function(aes(colour = "t, df = 27"), fun = pt, args = list(df = 27)) +
+  theme_classic() + 
   labs(y = "probabilidad",
        title = "Distribución t y normal estándar",
        x = "x")
 
+Densidad / Distribucion
 ```
 
 ##  
@@ -1129,4 +1143,52 @@ $$\chi^2=\frac{(4)(0.815)}{1}=3.26$$
 es un valor de una distribución chi cuadrada con $4$ grados de libertad. Como $95\%$ de los valores $\chi^2$ con $4$ grados de libertad caen entre `r round(qchisq(.025,4),3)` y `r round(qchisq(.975,4),3)`, el valor calculado con
 $\sigma^2 = 1$ es razonable y, por lo tanto, el fabricante no tiene razones para sospechar que la
 desviación estándar no sea igual a $1$ año.
+
+## Distribución F
+
+### Fisher-Snedecor
+
+Sí $X_1 \sim \chi_{n_1}^2$ y $X_2 \sim \chi_{n_2}^2$ y son independientes y definimos 
+$$X=\frac{X_1/n_1}{X_2/n_2}$$ 
+entonces $X \sim F_{n_1,n_2}$ a veces denotada como $F(n_{1},n_{2})$ y su función de densidad está dada por 
+$$
+f(x) = \frac{\Gamma((n_{1}+n_{2})/2)(n_{1}/n_{2})^{n_{1}/2}x^{n_{1}/2-1}}
+{\Gamma(n_{1}/2)\Gamma(n_{2}/2)[(n_{1}/n_{2})x+1]^{(n_{1}+n_{2})/2}} \qquad \qquad x > 0,
+$$
+para $n_{1} = 1,2,\ldots$ y $n_{2} = 1,2,\ldots \,$.
+La distribución $F$ se usa para inferencia estadística de razones de varianzas de dos poblaciones normales.
+También se usa para inferencia estadística de razones de tasas de dos poblaciones exponenciales.
+
+
+
+##
+
+```{r distF, fig.height=6}
+base <-
+  ggplot() +
+  xlim(0, 5)
+
+Densidad <-base +
+  geom_function(aes(colour = "F, n1 = 1, n2 = 1"), fun = df, args = list(df1 = 1,df2 = 1)) +
+  geom_function(aes(colour = "F, n1 = 10, n2 = 1"), fun = df, args = list(df1 = 10,df2 = 1)) +
+  geom_function(aes(colour = "F, n1 = 1, n2 = 10"), fun = df, args = list(df1 = 1,df2 = 10)) +
+  geom_function(aes(colour = "F, n1 = 75, n2 = 75"), fun = df, args = list(df1 = 75,df2 = 75)) +
+  theme_classic() + 
+  labs(y = "probabilidad",
+       title = "Densidad F",
+       x = "x")
+
+
+Distribucion <-base +
+  geom_function(aes(colour = "F, n1 = 1, n2 = 1"), fun = pf, args = list(df1 = 1,df2 = 1)) +
+  geom_function(aes(colour = "F, n1 = 10, n2 = 1"), fun = pf, args = list(df1 = 10,df2 = 1)) +
+  geom_function(aes(colour = "F, n1 = 1, n2 = 10"), fun = pf, args = list(df1 = 1,df2 = 10)) +
+  geom_function(aes(colour = "F, n1 = 75, n2 = 75"), fun = pf, args = list(df1 = 75,df2 = 75)) +
+  theme_classic() + 
+  labs(y = "probabilidad",
+       title = "Distribución F",
+       x = "x")
+
+Densidad / Distribucion
+```
 
