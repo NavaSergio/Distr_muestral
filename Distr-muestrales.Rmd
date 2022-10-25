@@ -989,12 +989,25 @@ matrix(tiempofalla,ncol = 4) %>% kable(align = "cccc") %>%
 
 - Simule con *semilla fija* datos con distribución Normal, Exponencial, Uniforme, t, Ji Cuadrada. Esto realícelo para tamaños de muestra de 15, 30, 50 y 100.
 
+- ¿Qué conclusiones puede obtener a partir de esta práctica?
+
 ## 
 
 Ver la siguiente aplicación en Shiny [qqnorm](https://s3rgionava.shinyapps.io/QQnorm/?_ga=2.74771473.2040383487.1666298329-1276638344.1663958366)
 
 ![Pantalla de Shiny app QQnorm](figuras/QQnorm.png){width=70%}
 
+
+
+##  
+
+### ¿Cómo se ven otras distribuciones muestrales?
+
+
+Ver el archivo **distr_muestral_pequena2.R** en  [https://rstudio.cloud/content/4731243](https://rstudio.cloud/content/4731243)
+
+
+Simule la distribución muestral de la suma, mínimo y varianza para una población dada. La extracción será con reemplazo y con tamaño de muestra $n$ fijo. Grafique la distribución muestral.
 
 ## Distribución Ji-cuadrada (Chi-Square)
 

@@ -1467,6 +1467,8 @@ normal?
   Simule con \emph{semilla fija} datos con distribución Normal,
   Exponencial, Uniforme, t, Ji Cuadrada. Esto realícelo para tamaños de
   muestra de 15, 30, 50 y 100.
+\item
+  ¿Qué conclusiones puede obtener a partir de esta práctica?
 \end{itemize}
 \end{block}
 \end{frame}
@@ -1481,6 +1483,19 @@ Ver la siguiente aplicación en Shiny
 \includegraphics[width=0.7\textwidth,height=\textheight]{figuras/QQnorm.png}
 \caption{Pantalla de Shiny app QQnorm}
 \end{figure}
+\end{frame}
+
+\begin{frame}{}
+\protect\hypertarget{section-49}{}
+\begin{block}{¿Cómo se ven otras distribuciones muestrales?}
+\protect\hypertarget{cuxf3mo-se-ven-otras-distribuciones-muestrales}{}
+Ver el archivo \textbf{distr\_muestral\_pequena2.R} en
+\url{https://rstudio.cloud/content/4731243}
+
+Simule la distribución muestral de la suma, mínimo y varianza para una
+población dada. La extracción será con reemplazo y con tamaño de muestra
+\(n\) fijo. Grafique la distribución muestral.
+\end{block}
 \end{frame}
 
 \begin{frame}{Distribución Ji-cuadrada (Chi-Square)}
@@ -1503,7 +1518,7 @@ porcentaje de productos de baja calidad.
 \end{frame}
 
 \begin{frame}{}
-\protect\hypertarget{section-49}{}
+\protect\hypertarget{section-50}{}
 La varianza muestral
 
 \[s^2=\frac{\sum_{i=1}^n (x_i -\bar{x})}{n-1}.\]
@@ -1519,7 +1534,7 @@ forma de la distribución de origen.
 \end{frame}
 
 \begin{frame}{}
-\protect\hypertarget{section-50}{}
+\protect\hypertarget{section-51}{}
 \begin{block}{En el caso de población normal}
 \protect\hypertarget{en-el-caso-de-poblaciuxf3n-normal}{}
 Si la población de origen de las muestras es normal, entonces la
@@ -1542,7 +1557,7 @@ entonces \[X=Z_1^2 +Z_2^2+\cdots+Z_n^2\] entonces \(X\sim\chi_n^2\).
 \end{frame}
 
 \begin{frame}{}
-\protect\hypertarget{section-51}{}
+\protect\hypertarget{section-52}{}
 \begin{block}{Distribución Ji-cuadrada}
 \protect\hypertarget{distribuciuxf3n-ji-cuadrada}{}
 Una variable aleatoria \(x\) tiene una distribución ji-cuadrada
@@ -1563,12 +1578,12 @@ Casos importantes: \(\Gamma(1/2)=\sqrt{\pi}\)
 \end{frame}
 
 \begin{frame}{}
-\protect\hypertarget{section-52}{}
+\protect\hypertarget{section-53}{}
 \begin{center}\includegraphics{Distr-muestrales_files/figure-beamer/unnamed-chunk-19-1} \end{center}
 \end{frame}
 
 \begin{frame}{}
-\protect\hypertarget{section-53}{}
+\protect\hypertarget{section-54}{}
 \begin{block}{Estimación de Varianzas}
 \protect\hypertarget{estimaciuxf3n-de-varianzas}{}
 \textbf{Teorema}. Si \(s^2\) es la varianza de una muestra aleatoria de
@@ -1596,7 +1611,7 @@ que el valor de \(\sigma^2\) que se supuso sea un error.
 \end{frame}
 
 \begin{frame}{}
-\protect\hypertarget{section-54}{}
+\protect\hypertarget{section-55}{}
 \begin{block}{Ejemplo}
 \protect\hypertarget{ejemplo-2}{}
 Un fabricante de baterías para automóvil garantiza que su producto
@@ -1638,7 +1653,7 @@ estadística de razones de tasas de dos poblaciones exponenciales.
 \end{frame}
 
 \begin{frame}{}
-\protect\hypertarget{section-55}{}
+\protect\hypertarget{section-56}{}
 \begin{center}\includegraphics{Distr-muestrales_files/figure-beamer/distF-1} \end{center}
 \end{frame}
 
