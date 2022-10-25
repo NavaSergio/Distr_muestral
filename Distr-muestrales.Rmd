@@ -1004,10 +1004,12 @@ Ver la siguiente aplicación en Shiny [qqnorm](https://s3rgionava.shinyapps.io/Q
 ### ¿Cómo se ven otras distribuciones muestrales?
 
 
-Ver el archivo **distr_muestral_pequena2.R** en  [https://rstudio.cloud/content/4731243](https://rstudio.cloud/content/4731243)
+- Ejecute el archivo **distr_muestral_pequena2.R** en  [https://rstudio.cloud/content/4731243](https://rstudio.cloud/content/4731243) y discuta las salidas.
 
 
-Simule la distribución muestral de la suma, mínimo y varianza para una población dada. La extracción será con reemplazo y con tamaño de muestra $n$ fijo. Grafique la distribución muestral.
+- Simule la distribución muestral de la suma, mínimo y varianza para una población dada. La extracción será con reemplazo y con tamaño de muestra $n$ fijo. Grafique la distribución muestral.
+
+- ¿Qué conclusiones puede obtener a partir de esta práctica?
 
 ## Distribución Ji-cuadrada (Chi-Square)
 
