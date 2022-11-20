@@ -119,9 +119,16 @@ renderPlot({
     theme_bw()
   
   if (input$Intervalo) 
-    g1 <- base2 + geom_errorbar(data=resumen,aes(ymin=y-ci, ymax=y+ci), width=.1, color ="blue")
+{    g1 <- base2 + geom_errorbar(data=resumen,
+                                aes(ymin=y-ci, ymax=y+ci), 
+                                width=.1, 
+                                color ="blue")}
   else
-    g1 <- base2 + geom_dotplot(binaxis='y', stackdir='center', dotsize=.3, colour = tratamiento, fill =tratamiento)
+{    g1 <- base2 + geom_dotplot(binaxis='y', 
+                               stackdir='center', 
+                               dotsize=.3, 
+                               colour = tratamiento, 
+                               fill = tratamiento)}
  
     if (input$Media) 
     g1 <- g1 + geom_hline(yintercept = mean(Datos$y, na.rm=TRUE))
