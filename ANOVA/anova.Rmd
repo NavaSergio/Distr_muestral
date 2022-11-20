@@ -130,8 +130,7 @@ renderPlot({
                                colour = tratamiento, 
                                fill = tratamiento)}
  
-    if (input$Media) 
-    g1 <- g1 + geom_hline(yintercept = mean(Datos$y, na.rm=TRUE))
+    if (input$Media) {g1 <- g1 + geom_hline(yintercept = mean(Datos$y, na.rm=TRUE))}
 
   base <-   ggplot() +
   xlim(-5, 10)
