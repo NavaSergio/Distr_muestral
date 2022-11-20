@@ -92,6 +92,9 @@ inputPanel(
               min = 10, max = 30, value = 15, step = 1), 
   checkboxInput(inputId="Intervalo",
                            label="Intervalo de Confianza", 
+                           value = F), 
+  checkboxInput(inputId="Media",
+                           label="Promedio Global", 
                            value = F)
 )
 
@@ -119,8 +122,10 @@ renderPlot({
     g1 <- base2 + geom_errorbar(data=resumen,aes(ymin=y-ci, ymax=y+ci), width=.1, color ="blue")
   else
     g1 <- base2 + geom_dotplot(binaxis='y', stackdir='center', dotsize=.3, colour = tratamiento, fill =tratamiento)
-    
-  
+ 
+    if (input$Media) 
+    g1 <- g1 + geom_hline(yintercept = mean(Datos$y, na.rm=TRUE))
+
   base <-   ggplot() +
   xlim(-5, 10)
   
