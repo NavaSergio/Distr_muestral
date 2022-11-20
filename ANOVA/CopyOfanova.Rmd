@@ -1,0 +1,114 @@
+---
+title: "anova"
+output: html_document
+date: "2022-11"
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(patchwork)
+library(ggtext)
+```
+
+This R Markdown document is made interactive using Shiny. Unlike the more traditional workflow of creating static reports, you can now create documents that allow your readers to change the assumptions underlying your analysis and see the results immediately. 
+
+To learn more, see [Interactive Documents](http://rmarkdown.rstudio.com/authoring_shiny.html).
+
+## Inputs and Outputs
+
+You can embed Shiny inputs and outputs in your document. Outputs are automatically updated whenever inputs change.  This demonstrates how a standard R plot can be made interactive by wrapping it in the Shiny `renderPlot` function. The `selectInput` and `sliderInput` functions create the input widgets used to drive the plot.
+
+```{r anova, echo=FALSE}
+inputPanel(
+  sliderInput("varianza", label = "Varianza:",
+              min = 0.2, max = 2, value = 1, step = 0.2),
+   sliderInput("nivel_1", label = "Nivel medio del tratamiento 1:",
+              min = 0.5, max = 5, value = 1, step = 0.5), 
+   sliderInput("nivel_2", label = "Nivel medio del tratamiento 2:",
+              min = 0.5, max = 5, value = 1.5, step = 0.5),
+   sliderInput("nivel_3", label = "Nivel medio del tratamiento 3:",
+              min = 0.5, max = 5, value = 2, step = 0.5)  
+)
+
+renderPlot({
+
+  set.seed(128498)
+  n <- 15
+  error <- rnorm(3*n,0,sqrt(input$varianza))
+  tratamiento <- rep(1:3,each = n)
+  y <- rep(c(input$nivel_1,input$nivel_2,input$nivel_3),each = n) + error
+  Datos <- data.frame(tratamiento=as.factor(tratamiento),y) 
+  g1 <- Datos %>%
+    ggplot(aes(tratamiento,y))+
+    geom_boxplot() +
+    geom_dotplot(binaxis='y', stackdir='center', dotsize=1,colour = tratamiento) +
+    ylim(-5, 10)
+  base <-   ggplot() +
+  xlim(-5, 10)
+  g2 <- base + 
+    geom_function(aes(colour = "Tratamiento 1"),
+                  fun = dnorm, 
+                  args = list(mean = input$nivel_1, sd =sqrt(input$varianza)),
+                  color = "black")+
+    geom_function(aes(colour = "Tratamiento 2"),
+                  fun = dnorm, 
+                  args = list(mean = input$nivel_2, sd =sqrt(input$varianza)),
+                  color = "red")+    
+    geom_function(aes(colour = "Tratamiento 3"),
+                  fun = dnorm, 
+                  args = list(mean = input$nivel_3, sd =sqrt(input$varianza)),
+                  color = "green")+    
+    coord_flip()
+  
+  string <- "Veamos ahora que se puede hacer"
+  text1 <- ggplot(data = tibble(x = 0, y = 1, label = string)) +
+  aes(x = x, y = y, label = label) +
+  geom_textbox(
+    box.color = NA,
+    fill = NA,
+    width = unit(10, "cm"),
+    hjust = 0,
+    vjust = 1
+  ) +
+  scale_x_continuous(limits = c(0, 1), expand = c(0, 0)) +
+  scale_y_continuous(limits = c(0, 1), expand = c(0, 0)) +
+  theme_void() +
+  theme(
+    plot.margin = margin(0, 0, 0, 0)
+  )
+  tabla <- Datos %>% lm(data = ., y ~ tratamiento) %>% anova() %>% round(2)
+  
+  text1 <- gridExtra::tableGrob(tabla)
+
+    
+  (g2+ g1 + plot_layout(widths = c(1, 3))) | (text1)
+})
+```
+
+
+## Embedded Application
+
+It's also possible to embed an entire Shiny application within an R Markdown document using the `shinyAppDir` function. This example embeds a Shiny application located in another directory:
+
+```{r tabsets, echo=FALSE}
+shinyAppDir(
+  system.file("examples/06_tabsets", package = "shiny"),
+  options = list(
+    width = "100%", height = 550
+  )
+)
+```
+
+Note the use of the `height` parameter to determine how much vertical space the embedded application should occupy.
+
+You can also use the `shinyApp` function to define an application inline rather then in an external directory.
+
+In all of R code chunks above the `echo = FALSE` attribute is used. This is to prevent the R code within the chunk from rendering in the document alongside the Shiny components.
+
+```{r, echo = FALSE}
+library(rmdexamples)
+kmeans_cluster(iris)
+```
+

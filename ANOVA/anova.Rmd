@@ -1,0 +1,155 @@
+---
+title: "anova"
+output: html_document
+date: "2022-11"
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(patchwork)
+library(ggtext)
+```
+
+
+## ANOVA 
+$a$
+
+
+**One-way ANOVA:**
+
+$k =$ number of populations or treatments being compared
+
+$\mu_1 =$ mean of population 1 or true average response when treatment 1 is applied.
+
+...
+
+$\mu_k =$ mean of population $k$ or true average response when treatment $k$ is applied.
+  
+**Assumptions:**
+
+
+- For each population, response variable is normally distributed
+- Variance of response variable, $\sigma^2$ is the same for all the populations
+- The observations must be independent
+
+
+**Hypotheses:**
+
+$H_o: \mu_1 = \mu_2 = ... = \mu_k$
+
+$H_a: \mu_i \neq \mu_j$ for $i \neq j$
+
+**Notation:**
+
+$y_{ij}$ is the $j^{th}$ observed value from the $i^{th}$ population/treatment.
+
+Total mean:  $\overline{y}_{i\cdot} = \frac{y_{i\cdot}}{n_i} = \frac{\sum_{j=1}^{n_i}y_{ij}}{n_i}$
+      
+Total sample size:  $n = n_1 + n_2 + ... + n_k$ 
+  	
+Grand total:  $y_{\cdot\cdot} = \sum_{i=1}^{k}\sum_{j=1}^{n_i}y_{ij}$
+  	
+Grand mean:  $\overline{y}_{\cdot\cdot} = \frac{y_{\cdot\cdot}}{n} = \frac{\sum_{i=1}^{k}\sum_{j=1}^{n_i}y_{ij}}{n}$
+
+
+$s^2 = \frac{\sum_{j=1}^{k}(n_i-1)s_i^2}{n-k}$ = MSE, where	$s_i^2 = \frac{\sum_{j=1}^{n_i}(y_{ij}-\overline{y}_{i\cdot})^2}{n_i-1}$\\
+
+**The ANOVA Table:**
+
+
+|     Source of Variation | df | Sum of Squares | Mean Square | F-ratio |
+|:---|:---:|:---:|:---:|:---:|:---:|
+|     Treatment | $k-1$ | SSTr | MSTr = $\frac{\textrm{SSTr}}{k-1}$ | $\frac{\textrm{MSTr}}{\textrm{MSE}}$ |
+|     Error | $n-k$ | SSE | MSE = $\frac{\textrm{SSE}}{n-k}$ |  |
+|     Total | $n-1$ | SST |  |  |
+
+
+
+SST = SSTr + SSE
+      
+SST = $\sum_{i=1}^{k}\sum_{j=1}^{n_i}(y_{ij}-\overline{y}_{\cdot\cdot})^2 = \sum_{i=1}^{k}\sum_{j=1}^{n_i}y_{ij}^2-\frac{1}{n}y_{\cdot\cdot}^2$
+
+SSTr = $\sum_{i=1}^{k}\sum_{j=1}^{n_i}(\overline{y}_{i\cdot}-\overline{y}_{\cdot\cdot})^2 = \sum_{i=1}^{k}\frac{1}{n_i}y_{i\cdot}^2-\frac{1}{n}y_{\cdot\cdot}^2$
+
+SSE = $\sum_{i=1}^{k}\sum_{j=1}^{n_i}(y_{ij}-\overline{y}_{i\cdot})^2= \sum_{i=1}^{k}\sum_{j=1}^{n_i}y_{ij}^2-\sum_{i=1}^{k}\frac{y_{i\cdot}^2}{n_i} = \sum_{i=1}^{k}(n_i-1)s_i^2$
+
+
+  
+**Test Statistic:**
+
+$F_{obs} = \frac{\textrm{MSTr}}{\textrm{MSE}} \sim F_{v_1, v_2}$   $v1 = df(\textrm{SSTr}) = k-1$
+	
+$v2 = df(\textrm{SSE}) = n-k$
+	
+Reject $H_o$ if $F_{obs} \geq F_{\alpha, v_1, v_2}$
+
+  
+
+```{r anova, echo=FALSE}
+inputPanel(
+  sliderInput("varianza", label = "Varianza:",
+              min = 0.2, max = 4, value = 1, step = 0.2),
+   sliderInput("nivel_1", label = "Nivel medio del tratamiento 1:",
+              min = 0.5, max = 5, value = 1, step = 0.5), 
+   sliderInput("nivel_2", label = "Nivel medio del tratamiento 2:",
+              min = 0.5, max = 5, value = 1.5, step = 0.5),
+   sliderInput("nivel_3", label = "Nivel medio del tratamiento 3:",
+              min = 0.5, max = 5, value = 2, step = 0.5)  
+)
+
+renderPlot({
+
+  set.seed(128498)
+  n <- 15
+  error <- rnorm(3*n,0,sqrt(input$varianza))
+  tratamiento <- rep(1:3,each = n)
+  y <- rep(c(input$nivel_1,input$nivel_2,input$nivel_3),each = n) + error
+  Datos <- data.frame(tratamiento=as.factor(tratamiento),y) 
+  g1 <- Datos %>%
+    ggplot(aes(tratamiento,y))+
+    geom_boxplot() +
+    geom_dotplot(binaxis='y', stackdir='center', dotsize=1,colour = tratamiento) +
+    ylim(-5, 10) + theme_bw()
+  base <-   ggplot() +
+  xlim(-5, 10)
+  g2 <- base + 
+    geom_function(aes(colour = "Tratamiento 1"),
+                  fun = dnorm, 
+                  args = list(mean = input$nivel_1, sd =sqrt(input$varianza)),
+                  color = "black")+
+    geom_function(aes(colour = "Tratamiento 2"),
+                  fun = dnorm, 
+                  args = list(mean = input$nivel_2, sd =sqrt(input$varianza)),
+                  color = "red")+    
+    geom_function(aes(colour = "Tratamiento 3"),
+                  fun = dnorm, 
+                  args = list(mean = input$nivel_3, sd =sqrt(input$varianza)),
+                  color = "green")+    
+    coord_flip() + theme_bw()
+  
+  string <- "Veamos ahora que se puede hacer"
+  text1 <- ggplot(data = tibble(x = 0, y = 1, label = string)) +
+  aes(x = x, y = y, label = label) +
+  geom_textbox(
+    box.color = NA,
+    fill = NA,
+    width = unit(10, "cm"),
+    hjust = 0,
+    vjust = 1
+  ) +
+  scale_x_continuous(limits = c(0, 1), expand = c(0, 0)) +
+  scale_y_continuous(limits = c(0, 1), expand = c(0, 0)) +
+  theme_void() +
+  theme(
+    plot.margin = margin(0, 0, 0, 0)
+  )
+  tabla <- Datos %>% lm(data = ., y ~ tratamiento) %>% anova() %>% round(2)
+  
+  text1 <- gridExtra::tableGrob(tabla) 
+    
+  (g2+ g1 + text1)+ plot_layout(widths = c(1, 3, 2))
+})
+```
+
