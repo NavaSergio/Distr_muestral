@@ -82,11 +82,11 @@ Reject $H_o$ if $F_{obs} \geq F_{\alpha, v_1, v_2}$
 inputPanel(
   sliderInput("varianza", label = "Varianza:",
               min = 0.2, max = 6, value = 3, step = 0.2),
-  sliderInput("nivel_1", label = "Nivel medio del tratamiento 1:",
+  sliderInput("nivel_1", label = "Nivel medio del Tratamiento 1:",
               min = 0, max = 5, value = 0.0, step = 0.2), 
-  sliderInput("nivel_2", label = "Nivel medio del tratamiento 2:",
+  sliderInput("nivel_2", label = "Nivel medio del Tratamiento 2:",
               min = 0, max = 5, value = 0.2, step = 0.2),
-  sliderInput("nivel_3", label = "Nivel medio del tratamiento 3:",
+  sliderInput("nivel_3", label = "Nivel medio del Tratamiento 3:",
               min = 0, max = 5, value = 0.4, step = 0.2),
   sliderInput("n", label = "n:",
               min = 10, max = 30, value = 15, step = 1), 
@@ -103,17 +103,17 @@ renderPlot({
   set.seed(128498)
   n <- input$n
   y <- rnorm(3*n)
-  tratamiento <- rep(1:3,each = n)
-  Datos <- data.frame(tratamiento=as.factor(tratamiento),y)  %>% 
-    group_by(tratamiento) %>% 
+  Tratamiento <- rep(1:3,each = n)
+  Datos <- data.frame(Tratamiento=as.factor(Tratamiento),y)  %>% 
+    group_by(Tratamiento) %>% 
     mutate(y = (y- mean(y))/sd(y)) %>% 
     ungroup()
   Datos$y <- Datos$y*sqrt(input$varianza) + 
     rep(c(input$nivel_1,input$nivel_2,input$nivel_3),each = n)
   resumen <- Datos %>% 
-    Rmisc::summarySE(data =., measurevar="y", groupvars=c("tratamiento"))
+    Rmisc::summarySE(data =., measurevar="y", groupvars=c("Tratamiento"))
   base2 <- Datos %>%
-    ggplot(aes(tratamiento,y)) +
+    ggplot(aes(Tratamiento,y)) +
     geom_errorbar(data=resumen,aes(ymin=y, ymax=y), width=.3, color ="blue") +
     ylim(-5, 10) + 
     theme_bw()
@@ -127,8 +127,8 @@ renderPlot({
 {    g1 <- base2 + geom_dotplot(binaxis='y', 
                                stackdir='center', 
                                dotsize=.3, 
-                               colour = tratamiento, 
-                               fill = tratamiento)}
+                               colour = Tratamiento, 
+                               fill = Tratamiento)}
  
     if (input$Media) {g1 <- g1 + geom_hline(yintercept = mean(Datos$y, na.rm=TRUE))}
 
@@ -152,7 +152,7 @@ renderPlot({
     theme_bw()
   
 
-  tabla <- Datos %>% lm(data = ., y ~ tratamiento) %>% anova() %>% round(2)
+  tabla <- Datos %>% lm(data = ., y ~ Tratamiento) %>% anova() %>% round(2)
   
   text1 <- gridExtra::tableGrob(replace(tabla, is.na(tabla), "")) 
     
