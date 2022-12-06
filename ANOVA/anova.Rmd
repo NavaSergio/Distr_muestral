@@ -38,7 +38,7 @@ $\mu_k =$ mean of population $k$ or true average response when treatment $k$ is 
 
 $$H_o: \mu_1 = \mu_2 = ... = \mu_k$$
 
-$$H_a: \mu_i \neq \mu_j$ for $i \neq j$$
+$$H_a: \mu_i \neq \mu_j\mbox{ for }i \neq j$$
 
 **Notation:**
 
